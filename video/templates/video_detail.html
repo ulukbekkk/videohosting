@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for v in video %}
-    <video class="video-fluid" controls autoplay loop muted height="450px" width="350"> <source src="{{ v.video.url }}"></video>
 
-    {% endfor %}
+<div>
+<h1>Title: {{ video.title }} </h1>
+<h3>Genre: {{ video.category }}</h3>
+<img style="hight: 450px; width: 300px; " src="{{ video.image.url }}" alt="">
+    </div>
+    <video class="video-fluid" controls autoplay loop muted height="300px" width="450">
+        <source src="{{ video.video.url }}">
+    </video>
+
+
 {% endblock %}

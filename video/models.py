@@ -11,8 +11,8 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         # http://test/object111/
-        return reverse('video:product_list_by_category',
-                       args=[self.slug, ])
+        return reverse('video:video_list_url')
+                       # args=[self.slug, ])
 
 
 class Video(models.Model):
@@ -38,7 +38,7 @@ class Video(models.Model):
 
     def get_absolute_url(self):
         # http://test/object111/
-        return reverse('video:product_details',
+        return reverse('video:video_detail_url',
                        args=[self.slug, ])
 
     def save(self):
