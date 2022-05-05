@@ -6,4 +6,15 @@
 <video class="video-fluid" autoplay loop muted height="450px" width="350"> <source src="{{ video.video.url }}"></video>
 
     {% endfor %}
+<section>
+									<header class="main">
+										<h1>Welcome to Cooking Blog </h1>
+									</header>
+										{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<div class="alert alert-success" role="alert">{{ message }}</div>
+										{% endfor %}
+									</ul>
+									{% endif %}
 {% endblock %}
