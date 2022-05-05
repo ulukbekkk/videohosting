@@ -38,7 +38,7 @@ class Video(models.Model):
 
     def get_absolute_url(self):
         # http://test/object111/
-        return reverse('video:video_detail_url',
+        return reverse('video_detail_url',
                        args=[self.slug, ])
 
     def save(self):

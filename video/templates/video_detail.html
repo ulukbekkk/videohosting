@@ -3,6 +3,8 @@
 {% block content %}
 
 <div>
+    <a href="{% url 'update_video_url' video.id %}">UPDATE</a>
+    <a href="{% url 'delete_video_url' video.id %}">DELETE</a>
 <h1>Title: {{ video.title }} </h1>
 <h3>Genre: {{ video.category }}</h3>
 <img style="hight: 450px; width: 300px; " src="{{ video.image.url }}" alt="">
