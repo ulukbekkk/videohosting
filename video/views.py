@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import modelformset_factory
 from django.contrib import messages
@@ -16,8 +17,7 @@ def get_video_detail(request, slug):
     return render(request, 'video_detail.html', context={'video': video})
 
 
-
-
+@login_required(login_url='login')
 def create_video(request):
     if request.method == 'POST':
         form = CreateVideoForm(request.POST, request.FILES)
@@ -31,8 +31,10 @@ def create_video(request):
     return render(request, 'create_video.html', {'create_form': form})
 
 
+
 def update_video(request, id):
     video = get_object_or_404(Video, id=id)
+    # if request.user ==
     video_form = UpdateVideoForm(request.POST or None, request.FILES or None, instance=video)
     if video_form.is_valid():
         video = video_form.save()
