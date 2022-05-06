@@ -1,12 +1,145 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
-{% for video in videos %}
-<a href="{% url 'video_detail_url' video.slug %}">{{ video.title }}</a>
-<video class="video-fluid" autoplay loop muted height="450px" width="350"> <source src="{{ video.video.url }}"></video>
+<!--{% for video in videos %}-->
 
-    {% endfor %}
-<section>
+<!--<a href="{% url 'video_detail_url' video.slug %}">{{ video.title }}</a>-->
+<!--<video class="video-fluid" autoplay loop muted height="450px" width="350"> <source src="{{ video.video.url }}"></video>-->
+
+<!--    {% endfor %}-->
+
+<!-- karto4ki -->
+
+<section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-01' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Education</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-02' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Teachers</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-03' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Students</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-02' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Online Meeting</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-03' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Networking</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--video list-->
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Upcoming Meetings</h2>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="categories">
+            <h4>Meeting Catgories</h4>
+            <ul>
+              <li><a href="#">Sed tempus enim leo</a></li>
+              <li><a href="#">Aenean molestie quis</a></li>
+              <li><a href="#">Cras et metus vestibulum</a></li>
+              <li><a href="#">Nam et condimentum</a></li>
+              <li><a href="#">Phasellus nec sapien</a></li>
+            </ul>
+            <div class="main-button-red">
+              <a href="meetings.html">All Upcoming Meetings</a>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-8">
+          <div class="row">
+            {% for video in videos %}
+
+
+
+            <div class="col-lg-4">
+              <div class="meeting-item">
+                <div class="thumb">
+                    <img height="350px" width="900" src="{{ video.image.url }}" alt="">
+<!--                <video class="video-fluid" autoplay loop muted height="550" width="400" > <source src="{{ video.video.url }}"></video>-->
+                </div>
+                <div class="down-content">
+
+                  <a href="{% url 'video_detail_url' video.slug %}"><h4>{{ video.title}}</h4></a>
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+<!--            bootstarap-->
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+
+<!--           {% for video in videos%}-->
+<!--  <div class="col-lg-4">-->
+<!--    <div class="card h-100">-->
+<!--      <img height="400" src="{{ video.image.url }}" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <a href="{% url 'video_detail_url' video.slug %}"><h4>{{ video.title}}</h4></a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--      {% endfor %}-->
+
+<!--bootstarp-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 									<header class="main">
 										<h1>Welcome to Cooking Blog </h1>
 									</header>

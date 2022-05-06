@@ -15,8 +15,8 @@ class RegisterView(SuccessMessageMixin, CreateView):
     success_message = 'Successfully registered'
 
 
-class SignInView(LoginView):
-    template_name = 'account/login.html'
+# class SignInView(LoginView):
+#     template_name = 'account/login.html'
 
 
 # class ProfileView(DetailView):

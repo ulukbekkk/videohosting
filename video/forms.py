@@ -2,7 +2,7 @@ from django.forms import ModelForm, ValidationError
 from .models import Video
 
 
-class VideoForm(ModelForm):
+class CreateVideoForm(ModelForm):
     class Meta:
         model = Video
         exclude = ('created_at', 'updated_at', 'slug')
@@ -13,7 +13,7 @@ class VideoForm(ModelForm):
             raise ValidationError('Slug with such name already exists!')
         return self.cleaned_data
 
-class VVideoForm(ModelForm):
+class UpdateVideoForm(ModelForm):
     class Meta:
         model = Video
         exclude = ('created_at', 'updated_at', 'slug')
