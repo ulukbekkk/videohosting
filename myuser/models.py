@@ -1,10 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from video.models import Video
 
 
 class User(AbstractUser):
-    video = models.ForeignKey(Video, related_name='user', on_delete=models.CASCADE, default='')
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=250)
