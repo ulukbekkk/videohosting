@@ -46,7 +46,7 @@ https://templatemo.com/tm-569-edu-meeting
                         <!--  Search-->
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
                           </form>
                         <!-- Nav next-->
                           <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
@@ -60,7 +60,13 @@ https://templatemo.com/tm-569-edu-meeting
                               </ul>
                           </li>
                           <li class="scroll-to-section"><a href="#courses">Courses</a></li>
-                          <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
+                          <li class="has-sub">
+                              <a href="javascript:void(0)">Sign</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{% url 'register' %}">Sign up</a></li>
+                                  <li><a href="meeting-details.html">Log in</a></li>
+                              </ul>
+                          </li>
                       </ul>
                       <a class='menu-trigger'>
                           <span>Menu</span>
@@ -97,7 +103,7 @@ https://templatemo.com/tm-569-edu-meeting
       </div>
   </section>
 
-
+{% block content %}{% endblock %}
 
 </body>
 </html>
