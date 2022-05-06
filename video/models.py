@@ -28,6 +28,7 @@ class Video(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+
     class Meta:
         ordering = ('title', )
         verbose_name = 'Video'
