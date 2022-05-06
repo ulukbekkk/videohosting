@@ -133,11 +133,15 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 AUTH_USER_MODEL = 'myuser.User'
 
-
+LOGIN_REDIRECT_URL = '/video'
+LOGOUT_REDIRECT_URL = '/video'
 
 
 # Default primary key field type

@@ -59,12 +59,18 @@ https://templatemo.com/tm-569-edu-meeting
                                   <li><a href="meeting-details.html">Meeting Details</a></li>
                               </ul>
                           </li>
-                          <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                          {% if request.user.is_authenticated%}
+                          <li class="scroll-to-section"><a href="{% url 'profile' %}">My profile</a></li>
+                          {% endif %}
                           <li class="has-sub">
                               <a href="javascript:void(0)">Sign</a>
                               <ul class="sub-menu">
+                                  {% if not request.user.is_authenticated %}
                                   <li><a href="{% url 'register' %}">Sign up</a></li>
-                                  <li><a href="meeting-details.html">Log in</a></li>
+                                  <li><a href="{% url 'login' %}">Log in</a></li>
+                                  {% else %}
+                                  <li><a href="{% url 'logout' %}">Log out</a></li>
+                                  {% endif %}
                               </ul>
                           </li>
                       </ul>
