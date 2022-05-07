@@ -1,17 +1,34 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
-from django.forms import modelformset_factory
 from django.contrib import messages
 
+from config import settings
 from .models import *
 from .forms import CreateVideoForm, UpdateVideoForm
 
 
-def get_video_list(request):
+def get_video_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
     videos = Video.objects.all()
-    return render(request, 'video_list.html', context={'videos': videos})
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        videos = videos.filter(category=category)
+
+    paginator = Paginator(videos, settings.PAGINATOR_NUM)
+    page_number = request.GET.get('page')
+    videos = paginator.get_page(page_number)
+
+    context = {
+        'videos': videos,
+        'categories': categories,
+        'category': category,
+    }
+
+    return render(request, 'video_list.html', context=context)
 
 
 def get_video_detail(request, slug):

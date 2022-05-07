@@ -77,17 +77,27 @@
         </div>
         <div class="col-lg-4">
           <div class="categories">
-            <h4>Meeting Catgories</h4>
-            <ul>
-              <li><a href="#">Sed tempus enim leo</a></li>
-              <li><a href="#">Aenean molestie quis</a></li>
-              <li><a href="#">Cras et metus vestibulum</a></li>
-              <li><a href="#">Nam et condimentum</a></li>
-              <li><a href="#">Phasellus nec sapien</a></li>
-            </ul>
-            <div class="main-button-red">
-              <a href="meetings.html">All Upcoming Meetings</a>
-            </div>
+            <h1>Categories:</h1>
+
+
+                <!--filter-->
+
+                <ul style="margin-top: 1px;">
+
+                <li class="main-button-red" {% if not category %} class="selected"{% endif %}>
+                <a href="{% url 'video_list_url' %}">All</a>
+                </li>
+
+                {% for cat in categories %}
+                <div class="main-button-red"> <li {% if category.slug == cat.slug %} class="selected"{% endif %}>
+
+                <a href="{{ cat.get_absolute_url }}" >{{ cat.genre }}</a>
+            </li></div>
+        {% endfor %}
+        </ul>
+
+
+
           </div>
         </div>
 
@@ -101,6 +111,7 @@
             <div class="col-lg-4">
               <div class="meeting-item">
                 <div class="thumb">
+                    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
                     <img height="350px" width="900" src="{{ video.image.url }}" alt="">
 <!--                <video class="video-fluid" autoplay loop muted height="550" width="400" > <source src="{{ video.video.url }}"></video>-->
                 </div>
@@ -113,7 +124,25 @@
             </div>
 
             {% endfor %}
+{% if videos %}
+<div class="pagination">
+    <span class="step-links">
+        {% if videos.has_previous %}
+            <a href="?page=1"> first</a>
+            <a href="?page={{ videos.previous_page_number }}">previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ videos.number }} of {{ videos.paginator.num_pages }}.
+        </span>
+
+        {% if videos.has_next %}
+            <a href="?page={{ videos.next_page_number }}">next</a>
+            <a href="?page={{ videos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+ {% endif %}
 <!--            bootstarap-->
               <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -121,10 +150,9 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
 
-									<header class="main">
-									</header>
 										{% if messages %}
 									<ul class="messages">
 										{% for message in messages %}

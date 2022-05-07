@@ -11,8 +11,8 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         # http://test/object111/
-        return reverse('video:video_list_url')
-                       # args=[self.slug, ])
+        return reverse('video_list_by_category',
+                       args=[self.slug, ])
 
 
 class Video(models.Model):
