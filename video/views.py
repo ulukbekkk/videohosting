@@ -41,7 +41,9 @@ def create_video(request):
     if request.method == 'POST':
         form = CreateVideoForm(request.POST, request.FILES)
         if form.is_valid():
-            video = form.save()
+            video = form.save(commit=False)
+            video.user = request.user
+            video.save()
             # product = Product.objects.create(**form.cleaned_data)
             return redirect(video.get_absolute_url())
     else:
@@ -55,7 +57,9 @@ def update_video(request, id):
     if request.user == video.user:
         video_form = UpdateVideoForm(request.POST or None, request.FILES or None, instance=video)
         if video_form.is_valid():
-            video = video_form.save()
+            video = video_form.save(commit=False)
+            video.user = request.user
+            video.save()
             return redirect(video.get_absolute_url())
         return render(request, 'update_video.html', locals())
     else:
@@ -72,8 +76,6 @@ def detele_video(request, pk):
         return render(request, 'delete_video.html', locals())
     else:
         return HttpResponse('<h1>403 Forbidden</h1>')
-
-
 
 
 def search_video(request):

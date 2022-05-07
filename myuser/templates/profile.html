@@ -11,7 +11,7 @@
         <p>{{ request.user.date_joined }}</p>
     </div>
     <span class="image object">
-        <img src="{{ request.user.image }}" style="width:500px; height:500px; " alt="" />
+        <img src="{{ request.user.image.url }}" style="width:500px; height:500px; " alt="" />
     </span>
 </section>
 {% endblock %}
