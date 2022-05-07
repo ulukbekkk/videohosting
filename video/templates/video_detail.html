@@ -31,7 +31,24 @@
             </div>
 
             </div>
-
+<!--{% with comment.count as total_comment %}Comments-->
+<!--              <h2>-->
+<!--                  {{ total_comment }} Comment {{ total_comment|pluralize }}-->
+<!--              </h2>-->
+<!--              {% endwith %}-->
+<!--              commentss-->
+              <h3>Comments {{ comment.count }}</h3>
+              {% for comm in comment %}
+              {{ comm.user }} -- {{ comm.create_at}} <br>
+              {{ comm.text }} <br><br>
+              {% endfor %}
+              <p>
+              <form action="" method="post">
+                  {% csrf_token %}
+                  {{form}}
+                  <input type="submit" value="Send">
+              </form>
+                </p>
           </div>
 
           </div>
