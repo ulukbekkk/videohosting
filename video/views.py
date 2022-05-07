@@ -7,7 +7,7 @@ from django.contrib import messages
 
 from config import settings
 from .models import *
-from .forms import CreateVideoForm, UpdateVideoForm
+from .forms import CreateVideoForm, UpdateVideoForm, CommentForm
 
 
 def get_video_list(request, category_slug=None):
@@ -33,7 +33,18 @@ def get_video_list(request, category_slug=None):
 
 def get_video_detail(request, slug):
     video = get_object_or_404(Video, slug=slug)
-    return render(request, 'video_detail.html', context={'video': video})
+    comment = Comment.objects.filter(video=video)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comm = form.save(commit=False)
+            comm.user = request.user
+            comm.video = video
+            comm.save()
+    else:
+        form = CommentForm()
+
+    return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment})
 
 
 @login_required(login_url='login')
