@@ -18,8 +18,10 @@
         <div style="padding-left: 30px;"><h2>Title: {{ video.title }} </h2>
         <h3>Genre: {{ video.category }}</h3>
             <p>description: {{ video.description }}</p>
+            {% if request.user.is_authenticated and request.user == video.user %}
             <a href="{% url 'update_video_url' video.id %}"><button type="button" class="btn btn-success">Update</button></a>
             <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
+                {% endif %}
          </div>
             <div style="display: flex; justify-content: center;" >
             <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
