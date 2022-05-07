@@ -120,7 +120,25 @@
             </div>
 
             {% endfor %}
+{% if videos %}
+<div class="pagination">
+    <span class="step-links">
+        {% if videos.has_previous %}
+            <a href="?page=1"> first</a>
+            <a href="?page={{ videos.previous_page_number }}">previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ videos.number }} of {{ videos.paginator.num_pages }}.
+        </span>
+
+        {% if videos.has_next %}
+            <a href="?page={{ videos.next_page_number }}">next</a>
+            <a href="?page={{ videos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+ {% endif %}
 <!--            bootstarap-->
               <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -128,6 +146,7 @@
         </div>
       </div>
     </div>
+
   </section>
 
 									<header class="main">
