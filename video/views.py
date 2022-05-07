@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import modelformset_factory
 from django.contrib import messages
@@ -54,3 +55,26 @@ def detele_video(request, pk):
         return render(request, 'delete_video.html', locals())
     else:
         return HttpResponse('<h1>403 Forbidden</h1>')
+
+
+
+
+def search_video(request):
+    category = None
+    categories = Category.objects.all()
+    video = None
+    search = request.GET.get('search')
+    if search:
+        video = Video.objects.filter(Q(title__icontains=search) |
+                                          Q(description__icontains=search)
+                                          )
+    context = {
+        'videos': video,
+        'categories': categories,
+        'category': category
+    }
+    return render(
+        request,
+        'video_list.html',
+        context
+    )
