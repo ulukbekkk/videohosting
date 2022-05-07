@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import modelformset_factory
 from django.contrib import messages
@@ -47,3 +48,25 @@ def detele_video(request, pk):
         messages.add_message(request, messages.SUCCESS, 'Successfully deleted!')
         return redirect("video_list_url")
     return render(request, 'delete_video.html', locals())
+
+
+
+def search_video(request):
+    category = None
+    categories = Category.objects.all()
+    video = None
+    search = request.GET.get('search')
+    if search:
+        video = Video.objects.filter(Q(title__icontains=search) |
+                                          Q(description__icontains=search)
+                                          )
+    context = {
+        'videos': video,
+        'categories': categories,
+        'category': category
+    }
+    return render(
+        request,
+        'video_list.html',
+        context
+    )
