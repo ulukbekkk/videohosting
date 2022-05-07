@@ -61,8 +61,6 @@ def detele_video(request, pk):
         return HttpResponse('<h1>403 Forbidden</h1>')
 
 
-
-
 def search_video(request):
     category = None
     categories = Category.objects.all()
