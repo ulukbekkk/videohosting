@@ -77,12 +77,12 @@
         </div>
         <div class="col-lg-4">
           <div class="categories">
-            <h4>Meeting Catgories</h4>
-            <ul>
+            <h1>Categories:</h1>
+
 
                 <!--filter-->
 
-                <ul style="margin-top: 10px;">
+                <ul style="margin-top: 1px;">
 
                 <li class="main-button-red" {% if not category %} class="selected"{% endif %}>
                 <a href="{% url 'video_list_url' %}">All</a>
@@ -91,15 +91,13 @@
                 {% for cat in categories %}
                 <div class="main-button-red"> <li {% if category.slug == cat.slug %} class="selected"{% endif %}>
 
-                <a href="{{ cat.get_absolute_url }}">{{ cat.genre }}</a>
-        </li></div>
-      {% endfor %}
-    </ul>
+                <a href="{{ cat.get_absolute_url }}" >{{ cat.genre }}</a>
+            </li></div>
+        {% endfor %}
+        </ul>
 
-            </ul>
-            <div class="main-button-red">
-              <a href="meetings.html">All Upcoming Meetings</a>
-            </div>
+
+
           </div>
         </div>
 
@@ -152,11 +150,9 @@
         </div>
       </div>
     </div>
-
+    </div>
   </section>
 
-									<header class="main">
-									</header>
 										{% if messages %}
 									<ul class="messages">
 										{% for message in messages %}
