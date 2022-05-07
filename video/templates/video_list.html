@@ -79,11 +79,23 @@
           <div class="categories">
             <h4>Meeting Catgories</h4>
             <ul>
-              <li><a href="#">Sed tempus enim leo</a></li>
-              <li><a href="#">Aenean molestie quis</a></li>
-              <li><a href="#">Cras et metus vestibulum</a></li>
-              <li><a href="#">Nam et condimentum</a></li>
-              <li><a href="#">Phasellus nec sapien</a></li>
+
+                <!--filter-->
+
+                <ul style="margin-top: 10px;">
+
+                <li class="main-button-red" {% if not category %} class="selected"{% endif %}>
+                <a href="{% url 'video_list_url' %}">All</a>
+                </li>
+
+                {% for cat in categories %}
+                <div class="main-button-red"> <li {% if category.slug == cat.slug %} class="selected"{% endif %}>
+
+                <a href="{{ cat.get_absolute_url }}">{{ cat.genre }}</a>
+        </li></div>
+      {% endfor %}
+    </ul>
+
             </ul>
             <div class="main-button-red">
               <a href="meetings.html">All Upcoming Meetings</a>
@@ -101,6 +113,7 @@
             <div class="col-lg-4">
               <div class="meeting-item">
                 <div class="thumb">
+                    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
                     <img height="350px" width="900" src="{{ video.image.url }}" alt="">
 <!--                <video class="video-fluid" autoplay loop muted height="550" width="400" > <source src="{{ video.video.url }}"></video>-->
                 </div>
