@@ -5,7 +5,8 @@ from .models import Video
 class CreateVideoForm(ModelForm):
     class Meta:
         model = Video
-        exclude = ('created_at', 'updated_at', 'slug')
+        exclude = ('user', 'created_at', 'updated_at', 'slug')
+
 
     def clean(self):
         slug = self.cleaned_data.get('title').lower().replace(" ", '-')
@@ -16,4 +17,4 @@ class CreateVideoForm(ModelForm):
 class UpdateVideoForm(ModelForm):
     class Meta:
         model = Video
-        exclude = ('created_at', 'updated_at', 'slug')
+        exclude = ('user', 'created_at', 'updated_at', 'slug')

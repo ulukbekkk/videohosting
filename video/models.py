@@ -16,6 +16,7 @@ class Category(models.Model):
 
 
 class Video(models.Model):
+    user = models.ForeignKey('myuser.User', related_name='video', on_delete=models.CASCADE, blank=True)
     category = models.ForeignKey(Category, related_name='video', on_delete=models.CASCADE)
     slug = models.SlugField(max_length=100, unique=True)
     title = models.CharField(max_length=100)
