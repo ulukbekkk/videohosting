@@ -24,39 +24,6 @@ def get_video_list(request, category_slug=None):
     return render(request, 'video_list.html', context={'videos': videos})
 
 
-# def get_product_list(request, category_slug=None):
-#     """Функция вытаскивает продукты и если слаг приходит заполненым
-#     то фильтрует по слагу и в конце возвращаем контексты
-#     """
-#
-#     category = None
-#     categories = Category.objects.all()
-#     products = Product.objects.filter(available=True).order_by('-created_at')
-#     if category_slug:
-#         category = get_object_or_404(Category, slug=category_slug)
-#         products = products.filter(category=category)
-#     # фильтрацию по прайс и по категориям
-#     products = product_list_filter_sort(
-#         request,
-#         products,
-#         category_slug
-#     )
-#
-#     paginator = Paginator(products, settings.PAGINATOR_NUM)
-#     page_number = request.GET.get('page')
-#     products = paginator.get_page(page_number)
-#
-#     context = {
-#         'products': products,
-#         'categories': categories,
-#         'category': category,
-#     }
-#     return render(
-#         request,
-#         'product/product_list.html',
-#         context
-#     )
-
 def get_video_detail(request, slug):
     video = get_object_or_404(Video, slug=slug)
     return render(request, 'video_detail.html', context={'video': video})
