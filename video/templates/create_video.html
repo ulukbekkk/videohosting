@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!--video list-->
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+        <div class="col-lg-8">
+          <div class="categories">
+            <h1>Create</h1>
+            <ul>
+                {% if request.user.is_authenticated %}
+              <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ create_form.as_p }}
+        <button type="submit" class="btn btn-success">Create</button>
+            </form>
+                {% else %}
+                <a>You Must Be Logged In To Create a Video</a>
+
+                <ul><a href="{% url 'register' %}">Sign up</a></ul>
+                <ul><a href="{% url 'login' %}">Log in</a></ul>
+                {% endif %}
+            </ul>
+
+          </div>
+        </div>
+
+        </div>
+    </section>
+{% endblock %}

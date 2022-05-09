@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- karto4ki -->
+
+<section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-01' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Education</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-02' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Teachers</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-03' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Students</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-02' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Online Meeting</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">
+                <img src="{% static '/images/service-icon-03' %}.png" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Best Networking</h4>
+                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--video list-->
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Upcoming Meetings</h2>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="categories">
+            <h1>Categories:</h1>
+
+
+                <!--filter-->
+
+                <ul style="margin-top: 1px;">
+
+                <li class="main-button-red" {% if not category %} class="selected"{% endif %}>
+                <a href="{% url 'video_list_url' %}">All</a>
+                </li>
+
+                {% for cat in categories %}
+                <div class="main-button-red"> <li {% if category.slug == cat.slug %} class="selected"{% endif %}>
+
+                <a href="{{ cat.get_absolute_url }}" >{{ cat.genre }}</a>
+            </li></div>
+        {% endfor %}
+        </ul>
+
+
+
+          </div>
+        </div>
+
+
+        <div class="col-lg-8">
+          <div class="row">
+
+            {% for video in videos %}
+
+
+            <div class="col-lg-4">
+              <div class="meeting-item">
+                <div class="thumb">
+                    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+                    <img height="350px" width="900" src="{{ video.image.url }}" alt="">
+<!--                <video class="video-fluid" autoplay loop muted height="550" width="400" > <source src="{{ video.video.url }}"></video>-->
+                </div>
+                <div class="down-content">
+
+                  <a href="{% url 'video_detail_url' video.slug %}"><h4>{{ video.title}}</h4></a>
+
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+{% if videos %}
+<div class="pagination">
+    <span class="step-links">
+        {% if videos.has_previous %}
+            <a href="?page=1"> first</a>
+            <a href="?page={{ videos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ videos.number }} of {{ videos.paginator.num_pages }}.
+        </span>
+
+        {% if videos.has_next %}
+            <a href="?page={{ videos.next_page_number }}">next</a>
+            <a href="?page={{ videos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+ {% endif %}
+<!--            bootstarap-->
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+										{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<div class="alert alert-success" role="alert">{{ message }}</div>
+										{% endfor %}
+									</ul>
+									{% endif %}
+{% endblock %}
