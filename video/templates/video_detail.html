@@ -36,7 +36,7 @@
 
         <div>
             <div style="display: flex; padding-left: 30px;" >
-         <img style="hight: 450px; width: 300px; display: flex" src="{{ video.image.url }}" alt="">
+         <img style="hight: 450px; width: 300px;" src="{{ video.image.url }}" alt="">
         <div style="padding-left: 30px;"><h2>Title: {{ video.title }} </h2>
         <h3>Genre: {{ video.category }}</h3>
             <p>description: {{ video.description }}</p>
@@ -71,10 +71,16 @@
 
               {% endfor %}</div>
               <p>
+              {% if request.user.is_authenticated %}
               <form action="" method="post">
                   {% csrf_token %}
                   {{form}}
                   <input type="submit" value="Send">
+              {% else %}
+              <a>You Must Be Logged In To Comment </a>
+              <li><a href="{% url 'register' %}">Sign up</a></li>
+              <li><a href="{% url 'login' %}">Log in</a></li>
+              {% endif %}
               </form>
                 </p>
                         </div>

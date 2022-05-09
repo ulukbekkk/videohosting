@@ -3,8 +3,8 @@ from .models import User
 
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(min_length=8, required=True, widget=forms.PasswordInput)
-    password_confirmation = forms.CharField(min_length=8, required=True, widget=forms.PasswordInput)
+    password = forms.CharField(min_length=8, max_length=20, required=True, widget=forms.PasswordInput)
+    password_confirmation = forms.CharField(min_length=8, max_length=20, required=True, widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -31,7 +31,7 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Passwords do not match')
         return data
 
-    def save(self, commit=True):
+    def save(self):
         user = User.objects.create_user(**self.cleaned_data)
         return user
 

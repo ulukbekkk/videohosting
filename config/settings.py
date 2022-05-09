@@ -143,6 +143,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 AUTH_USER_MODEL = 'myuser.User'
 
+LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/video'
 LOGOUT_REDIRECT_URL = '/video'
 

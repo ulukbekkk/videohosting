@@ -48,7 +48,7 @@ def get_video_detail(request, slug):
     return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment})
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def create_video(request):
     if request.method == 'POST':
         form = CreateVideoForm(request.POST, request.FILES)
