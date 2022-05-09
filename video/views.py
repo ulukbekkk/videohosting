@@ -8,6 +8,7 @@ from django.contrib import messages
 from config import settings
 from .models import *
 from .forms import CreateVideoForm, UpdateVideoForm, CommentForm
+from myuser.models import User
 
 
 def get_video_list(request, category_slug=None):
@@ -108,3 +109,31 @@ def search_video(request):
         'video_list.html',
         context
     )
+
+
+def delete_comment(request, id):
+    comment = Comment.objects.get(id=id)
+    video = Video.objects.get(comment=comment)
+    Comment.objects.get(id=id).delete()
+    return redirect(f'/video/video/{video.slug}/')
+
+
+
+
+def fav(request, slug):
+    video = Video.objects.get(slug=slug)
+    if request.user.is_authenticated:
+        if Fav.objects.filter(video=video, user=request.user).exists():
+            Fav.objects.filter(video=video, user=request.user).delete()
+        else:
+            Fav.objects.create(video=video, user=request.user)
+
+        return redirect(reverse('video_list_url'))
+    return render(request, 'fav.html', {'fav': fav})
+
+
+
+
+# def get_fav(request, id=None):
+#     fav = Fav.objects.all()
+#     return render(request, 'fav.html', {'fav': fav})

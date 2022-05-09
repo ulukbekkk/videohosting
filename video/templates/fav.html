@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for f in fav %}
+<img src="{{ f.video.image.url }}" alt="">
+
+{% endfor %}
+</body>
+</html>

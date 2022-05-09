@@ -58,3 +58,11 @@ class Comment(models.Model):
     text = models.TextField('Текст комментария', max_length=500)
     create_at = models.DateTimeField(auto_now_add=True)
     moder = models.BooleanField(default=False)
+
+
+class Fav(models.Model):
+    user = models.ForeignKey('myuser.User', related_name='fav', on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, related_name='fav', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.video
