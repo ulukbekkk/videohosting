@@ -84,18 +84,18 @@
 
                 <ul style="margin-top: 1px;">
 
-                <li class="main-button-red" {% if not category %} class="selected"{% endif %}>
+               <div class="main-button-red" {% if not category %} class="selected"{% endif %}>
                 <a href="{% url 'video_list_url' %}">All</a>
-                </li>
-
+                </div>
+                    {% for cat in categories %}
+                    <div class="main-button-red" class="selected">
+                    <a href="{% url 'video_list_by_category' cat.slug %}">{{ cat.genre }}</a>
+                    </div>
+                    {% endfor %}
 
         </ul>
-
-
-
           </div>
         </div>
-
 
         <div class="col-lg-8">
           <div class="row">

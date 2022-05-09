@@ -137,7 +137,6 @@ STATICFILES_DIRS = (
 )
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
-     "pinax.likes.auth_backends.CanLikeBackend",
 )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
