@@ -118,29 +118,22 @@ def delete_comment(request, id):
     return redirect(f'/video/video/{video.slug}/')
 
 
-# def get_base_html(request):
-#     video = Video.objects.all()
-#     user = User.objects.all()
-#
-#     # count_video = list(video).count()
-#     return render(request, 'base.html', context={'video': video, 'user': user})
 
 
 def fav(request, slug):
-    fav = Fav()
-    if request.user:
-        video = Video.objects.get(slug=slug)
-        fav.video = video
-        fav.user = request.user
-        fav.save()
-        # return render(request, '', {'fav': fav})
+    video = Video.objects.get(slug=slug)
+    if request.user.is_authenticated:
+        if Fav.objects.filter(video=video, user=request.user).exists():
+            Fav.objects.filter(video=video, user=request.user).delete()
+        else:
+            Fav.objects.create(video=video, user=request.user)
+
         return redirect(reverse('video_list_url'))
-
     return render(request, 'fav.html', {'fav': fav})
 
 
 
 
-def get_fav(request, id=None):
-    fav = Fav.objects.all()
-    return render(request, 'fav.html', {'fav': fav})
+# def get_fav(request, id=None):
+#     fav = Fav.objects.all()
+#     return render(request, 'fav.html', {'fav': fav})

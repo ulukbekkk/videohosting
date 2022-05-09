@@ -63,7 +63,7 @@ class Comment(models.Model):
 
 class Fav(models.Model):
     user = models.ForeignKey('myuser.User', related_name='fav', on_delete=models.CASCADE)
-    video = models.ForeignKey(Video, related_name='fav', on_delete=models.CASCADE, unique=True)
+    video = models.ForeignKey(Video, related_name='fav', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.video
