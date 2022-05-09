@@ -4,11 +4,11 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+
 from config import settings
 from .models import *
 from .forms import CreateVideoForm, UpdateVideoForm, CommentForm
-from django.http import HttpResponseRedirect
-from django.views.generic import RedirectView
+from myuser.models import User
 
 def like_video(request, pk):
     video = get_object_or_404(Video, id=request.POST.get('video_id'))
@@ -26,14 +26,14 @@ def get_video_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         videos = videos.filter(category=category)
 
-    # paginator = Paginator(videos, settings.PAGINATOR_NUM)
-    # page_number = request.GET.get('page')
-    # videos = paginator.get_page(page_number)
+    paginator = Paginator(videos, settings.PAGINATOR_NUM)
+    page_number = request.GET.get('page')
+    videos = paginator.get_page(page_number)
 
     context = {
         'videos': videos,
         'categories': categories,
-        'favourites': category,
+        'category': category,
     }
 
     return render(request, 'video_list.html', context=context)
@@ -56,7 +56,7 @@ def get_video_detail(request, slug):
     return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment, 'likes':likes})
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def create_video(request):
     if request.method == 'POST':
         form = CreateVideoForm(request.POST, request.FILES)
@@ -110,10 +110,38 @@ def search_video(request):
     context = {
         'videos': video,
         'categories': categories,
-        'favourites': category
+        'category': category
     }
     return render(
         request,
         'video_list.html',
         context
     )
+
+
+def delete_comment(request, id):
+    comment = Comment.objects.get(id=id)
+    video = Video.objects.get(comment=comment)
+    Comment.objects.get(id=id).delete()
+    return redirect(f'/video/video/{video.slug}/')
+
+
+
+
+def fav(request, slug):
+    video = Video.objects.get(slug=slug)
+    if request.user.is_authenticated:
+        if Fav.objects.filter(video=video, user=request.user).exists():
+            Fav.objects.filter(video=video, user=request.user).delete()
+        else:
+            Fav.objects.create(video=video, user=request.user)
+
+        return redirect(reverse('video_list_url'))
+    return render(request, 'fav.html', {'fav': fav})
+
+
+
+
+# def get_fav(request, id=None):
+#     fav = Fav.objects.all()
+#     return render(request, 'fav.html', {'fav': fav})

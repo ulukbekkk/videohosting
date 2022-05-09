@@ -9,7 +9,29 @@
           <div class="categories">
 
 
-            <div class="card text-white bg-secondary mb-15" style="max-width: 150rem;">
+
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+
+
+        <div class="col-lg-14">
+          <div class="section-heading">
+            <h2>Upcoming Meetings</h2>
+
+                          <div class="card text-white bg-secondary mb-15" style="max-width: 150rem;">
               <div class="card-header"><h1 style="text-align: center;">Video</h1></div>
 
         <div>
@@ -22,6 +44,10 @@
             <a href="{% url 'update_video_url' video.id %}"><button type="button" class="btn btn-success">Update</button></a>
             <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
                 {% endif %}
+<!--                <form method="post" enctype="multipart/form-data">form-data-->
+<!--                    {% csrf_token%}-->
+            <a href="{% url 'fav_url' video.slug %}"><button type="button" class="btn btn-primary">Fav</button></a>
+<!--                </form>-->
          </div>
             <form action="{% url 'like_video' video.pk %}" method="POST" >
                 {% csrf_token %}
@@ -37,52 +63,35 @@
             </div>
 
             </div>
-<!--{% with comment.count as total_comment %}Comments-->
-<!--              <h2>-->
-<!--                  {{ total_comment }} Comment {{ total_comment|pluralize }}-->
-<!--              </h2>-->
-<!--              {% endwith %}-->
+
+              <div class="card">
+                    <div class="card-body">
+
+
 <!--              commentss-->
-              <h3>Comments {{ comment.count }}</h3>
+              <div style="color: black"><h3>All comments ({{ comment.count }})</h3>
               {% for comm in comment %}
-              {{ comm.user }} -- {{ comm.create_at}} <br>
-              {{ comm.text }} <br><br>
-              {% endfor %}
+              <h3>{{ comm.user }}</h3> -- {{ comm.create_at}} <br>
+             <div> <p>Comment: {{ comm.text }}</p>  <a href="{% url 'delete_comment_url' comm.id %}"><button type="button" class="btn btn-danger">Delete Comment</button></a></div>
+                        <br><br>
+
+              {% endfor %}</div>
               <p>
+              {% if request.user.is_authenticated %}
               <form action="" method="post">
                   {% csrf_token %}
                   {{form}}
                   <input type="submit" value="Send">
+              {% else %}
+              <a>You Must Be Logged In To Comment </a>
+              <li><a href="{% url 'register' %}">Sign up</a></li>
+              <li><a href="{% url 'login' %}">Log in</a></li>
+              {% endif %}
               </form>
                 </p>
-          </div>
+                        </div>
 
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-<section class="upcoming-meetings" id="meetings">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <h2>Upcoming Meetings</h2>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="categories">
-            <h1>Video</h1>
-            <ul>
-
-            </ul>
-            <div class="main-button-red">
-              <a href="meetings.html">All Upcoming Meetings</a>
-            </div>
           </div>
         </div>
 

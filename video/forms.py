@@ -14,6 +14,7 @@ class CreateVideoForm(ModelForm):
             raise ValidationError('Slug with such name already exists!')
         return self.cleaned_data
 
+
 class UpdateVideoForm(ModelForm):
     class Meta:
         model = Video

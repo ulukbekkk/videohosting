@@ -63,3 +63,10 @@ class Comment(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
     video = models.ForeignKey(Video, related_name='likes', on_delete=models.CASCADE)
+
+class Fav(models.Model):
+    user = models.ForeignKey('myuser.User', related_name='fav', on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, related_name='fav', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.video
