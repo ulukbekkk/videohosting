@@ -9,46 +9,8 @@
           <div class="categories">
 
 
-            <div class="card text-white bg-secondary mb-15" style="max-width: 150rem;">
-              <div class="card-header"><h1 style="text-align: center;">Video</h1></div>
 
-        <div>
-            <div style="display: flex; padding-left: 30px;" >
-         <img style="hight: 450px; width: 300px;" src="{{ video.image.url }}" alt="">
-        <div style="padding-left: 30px;"><h2>Title: {{ video.title }} </h2>
-        <h3>Genre: {{ video.category }}</h3>
-            <p>description: {{ video.description }}</p>
-            {% if request.user.is_authenticated and request.user == video.user %}
-            <a href="{% url 'update_video_url' video.id %}"><button type="button" class="btn btn-success">Update</button></a>
-            <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
-                {% endif %}
-         </div>
-            <div style="display: flex; justify-content: center;" >
-            <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
-                <source src="{{ video.video.url }}">
-            </video>
-                </div>
-            </div>
 
-            </div>
-<!--{% with comment.count as total_comment %}Comments-->
-<!--              <h2>-->
-<!--                  {{ total_comment }} Comment {{ total_comment|pluralize }}-->
-<!--              </h2>-->
-<!--              {% endwith %}-->
-<!--              commentss-->
-              <h3>Comments {{ comment.count }}</h3>
-              {% for comm in comment %}
-              {{ comm.user }} -- {{ comm.create_at}} <br>
-              {{ comm.text }} <br><br>
-              {% endfor %}
-              <p>
-              <form action="" method="post">
-                  {% csrf_token %}
-                  {{form}}
-                  <input type="submit" value="Send">
-              </form>
-                </p>
           </div>
 
           </div>
@@ -63,20 +25,61 @@
 <section class="upcoming-meetings" id="meetings">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+
+
+        <div class="col-lg-14">
           <div class="section-heading">
             <h2>Upcoming Meetings</h2>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="categories">
-            <h1>Video</h1>
-            <ul>
 
-            </ul>
-            <div class="main-button-red">
-              <a href="meetings.html">All Upcoming Meetings</a>
+                          <div class="card text-white bg-secondary mb-15" style="max-width: 150rem;">
+              <div class="card-header"><h1 style="text-align: center;">Video</h1></div>
+
+        <div>
+            <div style="display: flex; padding-left: 30px;" >
+         <img style="hight: 450px; width: 300px; display: flex" src="{{ video.image.url }}" alt="">
+        <div style="padding-left: 30px;"><h2>Title: {{ video.title }} </h2>
+        <h3>Genre: {{ video.category }}</h3>
+            <p>description: {{ video.description }}</p>
+            {% if request.user.is_authenticated and request.user == video.user %}
+            <a href="{% url 'update_video_url' video.id %}"><button type="button" class="btn btn-success">Update</button></a>
+            <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
+                {% endif %}
+<!--                <form method="post" enctype="multipart/form-data">form-data-->
+<!--                    {% csrf_token%}-->
+            <a href="{% url 'fav_url' video.slug %}"><button type="button" class="btn btn-primary">Fav</button></a>
+<!--                </form>-->
+         </div>
+            <div style="display: flex; justify-content: center;" >
+            <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
+                <source src="{{ video.video.url }}">
+            </video>
+                </div>
             </div>
+
+            </div>
+
+              <div class="card">
+                    <div class="card-body">
+
+
+<!--              commentss-->
+              <div style="color: black"><h3>All comments ({{ comment.count }})</h3>
+              {% for comm in comment %}
+              <h3>{{ comm.user }}</h3> -- {{ comm.create_at}} <br>
+             <div> <p>Comment: {{ comm.text }}</p>  <a href="{% url 'delete_comment_url' comm.id %}"><button type="button" class="btn btn-danger">Delete Comment</button></a></div>
+                        <br><br>
+
+              {% endfor %}</div>
+              <p>
+              <form action="" method="post">
+                  {% csrf_token %}
+                  {{form}}
+                  <input type="submit" value="Send">
+              </form>
+                </p>
+                        </div>
+
+          </div>
           </div>
         </div>
 
