@@ -7,6 +7,7 @@ class CreateVideoForm(ModelForm):
         model = Video
         exclude = ('user', 'created_at', 'updated_at', 'slug')
 
+
     def clean(self):
         slug = self.cleaned_data.get('title').lower().replace(" ", '-')
         if Video.objects.filter(slug=slug).exists():

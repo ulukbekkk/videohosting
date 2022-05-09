@@ -152,6 +152,5 @@ LOGOUT_REDIRECT_URL = '/video'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
 # custom settings
 PAGINATOR_NUM = 2

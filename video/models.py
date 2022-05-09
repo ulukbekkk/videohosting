@@ -37,7 +37,6 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
-
     def get_absolute_url(self):
         # http://test/object111/
         return reverse('video_detail_url',
