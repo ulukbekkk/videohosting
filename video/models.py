@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from myuser.models import User
 
 class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
@@ -59,3 +59,7 @@ class Comment(models.Model):
     text = models.TextField('Текст комментария', max_length=500)
     create_at = models.DateTimeField(auto_now_add=True)
     moder = models.BooleanField(default=False)
+
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, related_name='likes', on_delete=models.CASCADE)

@@ -41,10 +41,9 @@ INSTALLED_APPS = [
 
     #my apps
     'video',
-    'category',
+    'favourites',
     'myuser',
     'order',
-
 ]
 
 MIDDLEWARE = [
@@ -136,6 +135,7 @@ STATICFILES_DIRS = (
 )
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
+     "pinax.likes.auth_backends.CanLikeBackend",
 )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
@@ -143,7 +143,6 @@ AUTH_USER_MODEL = 'myuser.User'
 
 LOGIN_REDIRECT_URL = '/video'
 LOGOUT_REDIRECT_URL = '/video'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

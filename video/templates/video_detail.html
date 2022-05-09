@@ -23,6 +23,12 @@
             <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
                 {% endif %}
          </div>
+            <form action="{% url 'like_video' video.pk %}" method="POST" >
+                {% csrf_token %}
+                <button type="submit" name="video_id" value="{{ video.id }}"
+                        class="btn btn-outline-primary btn-sm">Like</button>
+                <p>{{likes}}</p>
+            </form>
             <div style="display: flex; justify-content: center;" >
             <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
                 <source src="{{ video.video.url }}">
@@ -109,10 +115,4 @@
       </div>
     </div>
   </section>
-
-
-
-
-
-
 {% endblock %}

@@ -4,11 +4,19 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-
 from config import settings
 from .models import *
 from .forms import CreateVideoForm, UpdateVideoForm, CommentForm
+from django.http import HttpResponseRedirect
+from django.views.generic import RedirectView
 
+def like_video(request, pk):
+    video = get_object_or_404(Video, id=request.POST.get('video_id'))
+    if Like.objects.filter(user=request.user, video=video).exists():
+        Like.objects.get(user=request.user, video=video).delete()
+    else:
+        Like.objects.create(user=request.user, video=video)
+    return redirect('video_detail_url', video.slug)
 
 def get_video_list(request, category_slug=None):
     category = None
@@ -18,14 +26,14 @@ def get_video_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         videos = videos.filter(category=category)
 
-    paginator = Paginator(videos, settings.PAGINATOR_NUM)
-    page_number = request.GET.get('page')
-    videos = paginator.get_page(page_number)
+    # paginator = Paginator(videos, settings.PAGINATOR_NUM)
+    # page_number = request.GET.get('page')
+    # videos = paginator.get_page(page_number)
 
     context = {
         'videos': videos,
         'categories': categories,
-        'category': category,
+        'favourites': category,
     }
 
     return render(request, 'video_list.html', context=context)
@@ -34,6 +42,7 @@ def get_video_list(request, category_slug=None):
 def get_video_detail(request, slug):
     video = get_object_or_404(Video, slug=slug)
     comment = Comment.objects.filter(video=video)
+    likes = video.likes.all().count()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -44,7 +53,7 @@ def get_video_detail(request, slug):
     else:
         form = CommentForm()
 
-    return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment})
+    return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment, 'likes':likes})
 
 
 @login_required(login_url='login')
@@ -101,7 +110,7 @@ def search_video(request):
     context = {
         'videos': video,
         'categories': categories,
-        'category': category
+        'favourites': category
     }
     return render(
         request,
