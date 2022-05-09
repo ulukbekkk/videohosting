@@ -10,6 +10,13 @@ from .models import *
 from .forms import CreateVideoForm, UpdateVideoForm, CommentForm
 from myuser.models import User
 
+def like_video(request, pk):
+    video = get_object_or_404(Video, id=request.POST.get('video_id'))
+    if Like.objects.filter(user=request.user, video=video).exists():
+        Like.objects.get(user=request.user, video=video).delete()
+    else:
+        Like.objects.create(user=request.user, video=video)
+    return redirect('video_detail_url', video.slug)
 
 def get_video_list(request, category_slug=None):
     category = None
@@ -35,6 +42,7 @@ def get_video_list(request, category_slug=None):
 def get_video_detail(request, slug):
     video = get_object_or_404(Video, slug=slug)
     comment = Comment.objects.filter(video=video)
+    likes = video.likes.all().count()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -45,7 +53,7 @@ def get_video_detail(request, slug):
     else:
         form = CommentForm()
 
-    return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment})
+    return render(request, 'video_detail.html', context={'video': video, 'form': form, 'comment': comment, 'likes':likes})
 
 
 # @login_required(login_url='login')

@@ -13,6 +13,8 @@ urlpatterns = [
     path('update_video/<int:id>', update_video, name='update_video_url'),
     path('video/<str:slug>/', get_video_detail, name='video_detail_url'),
     path('fav/<str:slug>/', fav, name='fav_url'),
+    path('video/like/<int:pk>/', like_video, name="like_video"),
+    path('video/detail/<str:slug>/', get_video_detail, name='video_detail_url'),
     path('<str:category_slug>/', get_video_list, name='video_list_by_category'),
 
 

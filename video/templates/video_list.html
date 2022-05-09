@@ -88,12 +88,7 @@
                 <a href="{% url 'video_list_url' %}">All</a>
                 </li>
 
-                {% for cat in categories %}
-                <div class="main-button-red"> <li {% if category.slug == cat.slug %} class="selected"{% endif %}>
 
-                <a href="{{ cat.get_absolute_url }}" >{{ cat.genre }}</a>
-            </li></div>
-        {% endfor %}
         </ul>
 
 
