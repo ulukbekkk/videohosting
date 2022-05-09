@@ -29,7 +29,7 @@
           <div class="categories">
             <ul>
     {% for f in fav %}
-
+        <h1>Favourite films: </h1>
         <img src="{{ f.video.image.url }}" alt="" style="height: 450px; width:300px;">
                 <br>
     <a href="{% url 'video_detail_url' f.video.slug %}"><p>{{f.video.title }}</p></a>
