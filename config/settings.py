@@ -41,9 +41,8 @@ INSTALLED_APPS = [
 
     #my apps
     'video',
-    'favourites',
     'myuser',
-    'order',
+    'parsing',
 ]
 
 MIDDLEWARE = [
