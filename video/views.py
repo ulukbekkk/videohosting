@@ -10,7 +10,7 @@ from .models import *
 from .forms import CreateVideoForm, UpdateVideoForm, CommentForm
 from myuser.models import User
 
-
+@login_required()
 def like_video(request, pk):
     video = get_object_or_404(Video, id=pk)
     if Like.objects.filter(user=request.user, video=video).exists():
@@ -127,7 +127,7 @@ def delete_comment(request, id):
     Comment.objects.get(id=id).delete()
     return redirect(f'/video/video/{video.slug}/')
 
-
+@login_required()
 def fav(request, slug):
     video = Video.objects.get(slug=slug)
     if request.user.is_authenticated:
