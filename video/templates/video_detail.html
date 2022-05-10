@@ -43,7 +43,7 @@
                 <td><h3 style="text-align: start">Genre: </h3></td><td><h3 style="text-align: start"> {{ video.category }}</h3></td>
            </tr>
            <tr>
-                 <td><h4>Description: </h4></td><td><h4>{{ video.description }}</h4></td>
+                 <td><h4>Description: </h4></td><td><p>{{ video.description }}</p></td>
           </tr>
           </table>
 
@@ -61,6 +61,7 @@
                 <p>{{likes}}</p>
             </form>
           </div>
+                </div>
             <div style="display: flex; justify-content: center;" >
             <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
                 <source src="{{ video.video.url }}">
