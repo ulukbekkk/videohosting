@@ -35,6 +35,7 @@
               <div class="card-header"><h1 style="text-align: center;">Video</h1></div>
 
         <div>
+            <div>
             <div style="display: flex; padding-left: 30px;" >
          <img style="hight: 450px; width: 300px;" src="{{ video.image.url }}" alt="">
         <div style="padding-left: 30px;"><h2>Title: {{ video.title }} </h2>
@@ -44,15 +45,7 @@
             <a href="{% url 'update_video_url' video.id %}"><button type="button" class="btn btn-success">Update</button></a>
             <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
                 {% endif %}
-
-            <a href="{% url 'fav_url' video.slug %}"><button type="button" class="btn btn-outline-warning btn-sm"">Favourite</button></a>
-<!--                </form>-->
-                <form  style="padding-left: 30px;" action="{% url 'like_video' video.pk %}" method="POST" >
-                {% csrf_token %}
-                <button type="submit" name="video_id" value="{{ video.id }}"
-                        class="btn btn-outline-primary btn-sm">Like</button>
-                <p>{{likes}}</p>
-            </form>
+             </div>
          </div>
 
             <div style="display: flex; justify-content: center;" >
@@ -60,6 +53,16 @@
                 <source src="{{ video.video.url }}">
             </video>
                 </div>
+
+                <a href="{% url 'fav_url' video.slug %}"><button type="button" class="btn btn-outline-warning btn-sm; display:inline-block;">Favourite</button></a>
+<!--                </form>-->
+                <form  style="padding-left: 20px; display:inline-block;" action="{% url 'like_video' video.pk %}" method="POST" >
+                {% csrf_token %}
+                <button type="submit" name="video_id" value="{{ video.id }}"
+                        class="btn btn-outline-primary btn-sm">Like</button>
+                <p style="display:inline-block; padding-right: 20px;">{{likes}}</p>
+            </form>
+
             </div>
 
             </div>
