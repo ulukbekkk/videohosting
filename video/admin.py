@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Video, Category, Comment, Fav
+from .models import Video, Category, Comment, Fav, Like
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -20,3 +20,4 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Comment)
 admin.site.register(Fav)
+admin.site.register(Like)

@@ -10,54 +10,24 @@
         <div class="col-lg-12">
           <div class="owl-service-item owl-carousel">
 
-            <div class="item">
-              <div class="icon">
-                <img src="{% static '/images/service-icon-01' %}.png" alt="">
-              </div>
-              <div class="down-content">
-                <h4>Best Education</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
-              </div>
+            <div class="item2">
             </div>
 
-            <div class="item">
-              <div class="icon">
-                <img src="{% static '/images/service-icon-02' %}.png" alt="">
-              </div>
-              <div class="down-content">
-                <h4>Best Teachers</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
-              </div>
+            <div class="item3">
+
+
             </div>
 
-            <div class="item">
-              <div class="icon">
-                <img src="{% static '/images/service-icon-03' %}.png" alt="">
-              </div>
-              <div class="down-content">
-                <h4>Best Students</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
-              </div>
+            <div class="item4">
+
             </div>
 
-            <div class="item">
-              <div class="icon">
-                <img src="{% static '/images/service-icon-02' %}.png" alt="">
-              </div>
-              <div class="down-content">
-                <h4>Online Meeting</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
-              </div>
+            <div class="item5">
+
             </div>
 
-            <div class="item">
-              <div class="icon">
-                <img src="{% static '/images/service-icon-03' %}.png" alt="">
-              </div>
-              <div class="down-content">
-                <h4>Best Networking</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
-              </div>
+            <div class="item6">
+
             </div>
 
           </div>
@@ -84,18 +54,18 @@
 
                 <ul style="margin-top: 1px;">
 
-                <li class="main-button-red" {% if not category %} class="selected"{% endif %}>
+               <div class="main-button-red" {% if not category %} class="selected"{% endif %}>
                 <a href="{% url 'video_list_url' %}">All</a>
-                </li>
-
+                </div>
+                    {% for cat in categories %}
+                    <div class="main-button-red" class="selected">
+                    <a href="{% url 'video_list_by_category' cat.slug %}">{{ cat.genre }}</a>
+                    </div>
+                    {% endfor %}
 
         </ul>
-
-
-
           </div>
         </div>
-
 
         <div class="col-lg-8">
           <div class="row">

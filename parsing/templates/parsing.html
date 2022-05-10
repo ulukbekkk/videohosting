@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+
+
+        <div class="col-lg-14">
+          <div class="section-heading">
+            <h2>Welcome </h2>
+
+                          <div class="card text-white bg-secondary mb-15" style="max-width: 150rem;">
+              <div class="card-header"><h1 style="text-align: center;">Video</h1></div>
+
+        {% for i in zipped %}
+        <div><h4>Название:</h4>{{ i.0 }} <br>
+        Описание: <p>{{ i.1 }}</p> <br>
+        <img src="{{ i.2 }}" alt="" style="width: 200px; height: 250px" > </div><br>
+
+    {% endfor %}
+
+          </div>
+        </div>
+
+
+        <div class="col-lg-8">
+          <div class="row">
+            {% for video in videos %}
+
+
+
+            <div class="col-lg-4">
+              <div class="meeting-item">
+                <div class="thumb">
+                    <img height="350px" width="900" src="{{ video.image.url }}" alt="">
+<!--                <video class="video-fluid" autoplay loop muted height="550" width="400" > <source src="{{ video.video.url }}"></video>-->
+                </div>
+                <div class="down-content">
+
+                  <a href="{% url 'video_detail_url' video.slug %}"><h4>{{ video.title}}</h4></a>
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+<!--            bootstarap-->
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+{% endblock %}

@@ -12,12 +12,13 @@ from myuser.models import User
 
 @login_required()
 def like_video(request, pk):
-    video = get_object_or_404(Video, id=request.POST.get('video_id'))
+    video = get_object_or_404(Video, id=pk)
     if Like.objects.filter(user=request.user, video=video).exists():
         Like.objects.get(user=request.user, video=video).delete()
     else:
         Like.objects.create(user=request.user, video=video)
     return redirect('video_detail_url', video.slug)
+
 
 def get_video_list(request, category_slug=None):
     category = None
@@ -135,12 +136,6 @@ def fav(request, slug):
         else:
             Fav.objects.create(video=video, user=request.user)
 
-        return redirect(reverse('video_list_url'))
+        return redirect(f'/video/video/{video.slug}/')
     return render(request, 'fav.html', {'fav': fav})
 
-
-
-
-# def get_fav(request, id=None):
-#     fav = Fav.objects.all()
-#     return render(request, 'fav.html', {'fav': fav})

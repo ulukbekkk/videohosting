@@ -53,16 +53,9 @@ https://templatemo.com/tm-569-edu-meeting
                             <button class="btn btn-outline-success" type="submit">Search</button>
                           </form>
                         <!-- Nav next-->
-                          <li class="scroll-to-section"><a href="#top" class="Create">Home</a></li>
-                          <li><a href="meetings.html">Meetings</a></li>
-                          <li class="scroll-to-section"><a href="#apply">Apply Now</a></li>
-                          <li class="has-sub">
-                              <a href="javascript:void(0)">Pages</a>
-                              <ul class="sub-menu">
-                                  <li><a href="meetings.html">Upcoming Meetings</a></li>
-                                  <li><a href="meeting-details.html">Meeting Details</a></li>
-                              </ul>
-                          </li>
+
+                          <li class="scroll-to-section"><a href="{% url 'parsing_url' %}">News of Films</a></li>
+
                           <li class="scroll-to-section"><a href="{% url 'create_video_url' %}">Create</a></li>
                           <li class="has-sub scroll-to-section">
                               <a href="javascript:void(0)">Sign</a>
@@ -129,7 +122,7 @@ https://templatemo.com/tm-569-edu-meeting
                 </div>
                 <div class="col-12">
                   <div class="count-area-content">
-                    <div class="count-digit">{{ video_count }}</div>
+                    <div class="count-digit">{{ users_count }}</div>
                     <div class="count-title">Users</div>
                   </div>
                 </div>
@@ -139,7 +132,7 @@ https://templatemo.com/tm-569-edu-meeting
               <div class="row">
                 <div class="col-12">
                   <div class="count-area-content new-students">
-                    <div class="count-digit">{{ users_count }}</div>
+                    <div class="count-digit">{{ video_count }}</div>
                     <div class="count-title">Films</div>
                   </div>
                 </div>

@@ -778,16 +778,61 @@ services
   width: 100%;
 }
 
-.services .item {
-  background-image: url(../images/service-item-bg.jpg);
+.services .item6 {
+  background-image: url(../images/matrix.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   border-radius: 20px;
   text-align: center;
   color: #fff;
-  padding: 40px;
+  padding: 135px;
 }
+
+.services .item2 {
+  background-image: url(../images/titanic.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  padding: 135px;
+}
+
+.services .item3 {
+  background-image: url(../images/i_am_legend.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  padding: 135px;
+
+}
+
+.services .item4 {
+  background-image: url(../images/interstelar.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  padding: 135px;
+ }
+
+ .services .item5 {
+  background-image: url(../images/batman.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  padding: 135px;
+ }
 
 .services .item .icon {
   max-width: 60px;
