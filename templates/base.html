@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 
   <head>
@@ -63,10 +64,11 @@ https://templatemo.com/tm-569-edu-meeting
                               </ul>
                           </li>
                           <li class="scroll-to-section"><a href="{% url 'create_video_url' %}">Create</a></li>
-                          <li class="has-sub">
+                          <li class="has-sub scroll-to-section">
                               <a href="javascript:void(0)">Sign</a>
-                              <ul class="sub-menu">
+                              <ul class="sub-menu ">
                                   {% if not request.user.is_authenticated %}
+
                                   <li><a href="{% url 'register' %}">Sign up</a></li>
                                   <li><a href="{% url 'login' %}">Log in</a></li>
                                   {% else %}
@@ -98,9 +100,9 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="row">
               <div class="col-lg-12">
                 <div class="caption">
-              <div class="main-button-red">
-              </div>
-          </div>
+                    <div class="main-button-red">
+                    </div>
+                </div>
               </div>
             </div>
           </div>

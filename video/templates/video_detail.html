@@ -34,23 +34,38 @@
                           <div class="card text-white bg-secondary mb-15" style="max-width: 150rem;">
               <div class="card-header"><h1 style="text-align: center;">Video</h1></div>
 
-        <div>
+        <div style="display: flex; flex-direction: column">
             <div style="display: flex; padding-left: 30px;" >
-         <img style="hight: 450px; width: 300px;" src="{{ video.image.url }}" alt="">
-        <div style="padding-left: 30px;"><h2>Title: {{ video.title }} </h2>
-        <h3>Genre: {{ video.category }}</h3>
-            <p>description: {{ video.description }}</p>
+         <img style="height: 390px; width: 300px;" src="{{ video.image.url }}" alt="">
+        <div style="padding-left: 30px;"><h2 style="text-align: start; width:50%">Title: {{ video.title }} </h2>
+          <table>
+            <tr>
+                <td><h3 style="text-align: start">Genre: </h3></td><td><h3 style="text-align: start"> {{ video.category }}</h3></td>
+           </tr>
+           <tr>
+                 <td><h4>Description: </h4></td><td><h4>{{ video.description }}</h4></td>
+          </tr>
+          </table>
+
             {% if request.user.is_authenticated and request.user == video.user %}
             <a href="{% url 'update_video_url' video.id %}"><button type="button" class="btn btn-success">Update</button></a>
-            <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a></div>
+            <a href="{% url 'delete_video_url' video.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
                 {% endif %}
+
 <!--                <form method="post" enctype="multipart/form-data">form-data-->
 <!--                    {% csrf_token%}-->
-            <a href="{% url 'fav_url' video.slug %}"><button type="button" class="btn btn-primary">Fav</button></a>
 <!--                </form>-->
          </div>
+            <form action="{% url 'like_video' video.pk %}" method="POST" >
+                {% csrf_token %}
+                <button type="submit" name="video_id" value="{{ video.id }}"
+                        class="btn btn-outline-primary btn-sm">Like</button>
+                <a href="{% url 'fav_url' video.slug %}"><button type="button" class="btn btn-primary">Fav</button></a>
+                <p>{{likes}}</p>
+            </form>
+          </div>
             <div style="display: flex; justify-content: center;" >
-            <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
+            <video style="width: 900px;" class="video-fluid" controls autoplay loop muted height="600px" width="950">
                 <source src="{{ video.video.url }}">
             </video>
                 </div>
@@ -65,8 +80,13 @@
 <!--              commentss-->
               <div style="color: black"><h3>All comments ({{ comment.count }})</h3>
               {% for comm in comment %}
-              <h3>{{ comm.user }}</h3> -- {{ comm.create_at}} <br>
-             <div> <p>Comment: {{ comm.text }}</p>  <a href="{% url 'delete_comment_url' comm.id %}"><button type="button" class="btn btn-danger">Delete Comment</button></a></div>
+                  <h3>{{ comm.user }}</h3>  -- {{ comm.create_at}} <br>
+             <div> <p>Comment: {{ comm.text }}</p>  <a href="{% url 'delete_comment_url' comm.id %}">
+                 {% if request.user == video.user or request.user == comm.user %}
+                 <button type="button" class="btn btn-danger">Delete Comment</button>
+
+             {% endif %}
+             </a></div>
                         <br><br>
 
               {% endfor %}</div>
@@ -118,10 +138,4 @@
       </div>
     </div>
   </section>
-
-
-
-
-
-
 {% endblock %}

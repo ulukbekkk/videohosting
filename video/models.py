@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from myuser.models import User
 
 class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
@@ -37,6 +37,7 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
+
     def get_absolute_url(self):
         # http://test/object111/
         return reverse('video_detail_url',
@@ -59,6 +60,9 @@ class Comment(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     moder = models.BooleanField(default=False)
 
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, related_name='likes', on_delete=models.CASCADE)
 
 class Fav(models.Model):
     user = models.ForeignKey('myuser.User', related_name='fav', on_delete=models.CASCADE)
