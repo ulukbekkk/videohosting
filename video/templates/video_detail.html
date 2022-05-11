@@ -36,7 +36,8 @@
 
         <div style="display: flex; flex-direction: column">
             <div style="display: flex; padding-left: 30px;" >
-         <img style="height: 390px; width: 300px;" src="{{ video.image.url }}" alt="">
+                <div>
+         <img style="height: 390px; width: 270px;" src="{{ video.image.url }}" alt=""></div>
         <div style="padding-left: 30px;"><h2 style="text-align: start; width:50%">Title: {{ video.title }} </h2>
           <table>
             <tr>
@@ -55,7 +56,7 @@
          </div>
 
             <div style="display: flex; justify-content: center;" >
-            <video class="video-fluid" controls autoplay loop muted height="600px" width="950">
+            <video class="video-fluid" controls autoplay loop muted height="600px" width="950" type="video/mp4">
                 <source src="{{ video.video.url }}">
             </video>
                 </div>

@@ -41,7 +41,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = tuple()
 
     def __str__(self):
-        return self.get_full_name()
+        return self.first_name
 
     objects = MyUserManager()
 
