@@ -1,15 +1,123 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
-{% for video in videos %}
-<a href="{% url 'video_detail_url' video.slug %}">{{ video.title }}</a>
-<video class="video-fluid" autoplay loop muted height="450px" width="350"> <source src="{{ video.video.url }}"></video>
+<!-- karto4ki -->
 
-    {% endfor %}
-<section>
-									<header class="main">
-										<h1>Welcome to Cooking Blog </h1>
-									</header>
+<section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+
+            <div class="item2">
+            </div>
+
+            <div class="item3">
+
+
+            </div>
+
+            <div class="item4">
+
+            </div>
+
+            <div class="item5">
+
+            </div>
+
+            <div class="item6">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--video list-->
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Movies</h2>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="categories">
+            <h1>Categories:</h1>
+
+
+                <!--filter-->
+
+                <ul style="margin-top: 1px;">
+
+               <div class="main-button-red" {% if not category %} class="selected"{% endif %}>
+                <a href="{% url 'video_list_url' %}">All</a>
+                </div>
+                    {% for cat in categories %}
+                    <div class="main-button-red" class="selected">
+                    <a href="{% url 'video_list_by_category' cat.slug %}">{{ cat.genre }}</a>
+                    </div>
+                    {% endfor %}
+
+        </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="row">
+
+            {% for video in videos %}
+
+
+            <div class="col-lg-4">
+              <div class="meeting-item">
+                <div class="thumb">
+                    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+                    <img height="350px" width="900" src="{{ video.image.url }}" alt="">
+<!--                <video class="video-fluid" autoplay loop muted height="550" width="400" > <source src="{{ video.video.url }}"></video>-->
+                </div>
+                <div class="down-content">
+
+                  <a href="{% url 'video_detail_url' video.slug %}"><h4>{{ video.title}}</h4></a>
+
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+{% if videos %}
+<div class="pagination" style="color: gold">
+    <span class="step-links">
+        {% if videos.has_previous %}
+            <a href="?page=1"> first</a>
+            <a href="?page={{ videos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ videos.number }} of {{ videos.paginator.num_pages }}.
+        </span>
+
+        {% if videos.has_next %}
+            <a href="?page={{ videos.next_page_number }}">next</a>
+            <a href="?page={{ videos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+ {% endif %}
+<!--            bootstarap-->
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
 										{% if messages %}
 									<ul class="messages">
 										{% for message in messages %}

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-90x_yaiz!@lb&r=xb%@+75852q4$62&owbgpf4*_3f!cqki_r&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.242.244.240', '127.0.0.1']
 
 
 # Application definition
@@ -40,11 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #my apps
-    'video',
-    'category',
     'myuser',
-    'order',
-
+    'video',
+    'parsing',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +70,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'video.context_processors.video',
+                'video.context_processors.favourites',
+                'video.context_processors.get_base_html'
             ],
         },
     },
@@ -133,14 +134,39 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 AUTH_USER_MODEL = 'myuser.User'
 
-
-
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/video'
+LOGOUT_REDIRECT_URL = '/video'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# custom settings
+PAGINATOR_NUM = 2
+
+
+# send email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+
+
+
+
+
+
+
+

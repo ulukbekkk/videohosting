@@ -1,11 +1,12 @@
 from django.forms import ModelForm, ValidationError
-from .models import Video
+from .models import Video, Comment
 
 
-class VideoForm(ModelForm):
+class CreateVideoForm(ModelForm):
     class Meta:
         model = Video
-        exclude = ('created_at', 'updated_at', 'slug')
+        exclude = ('user', 'created_at', 'updated_at', 'slug')
+
 
     def clean(self):
         slug = self.cleaned_data.get('title').lower().replace(" ", '-')
@@ -13,7 +14,14 @@ class VideoForm(ModelForm):
             raise ValidationError('Slug with such name already exists!')
         return self.cleaned_data
 
-class VVideoForm(ModelForm):
+
+class UpdateVideoForm(ModelForm):
     class Meta:
         model = Video
-        exclude = ('created_at', 'updated_at', 'slug')
+        exclude = ('user', 'created_at', 'updated_at', 'slug')
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)

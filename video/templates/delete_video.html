@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 
-{% block content %} 
-<h1> Are you sure want to delete this recipe? </h1>
+{% block content %}
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+        <div class="col-lg-8">
+          <div class="categories">
+            <ul>
+<h1> Are you sure want to delete this video? </h1>
 <form method="post">
 	{% csrf_token %}
 
 	<input class="btn btn-primary" type="submit" value="YES">
-
 	</form>
-</body>
+                <br>
+                <a href="{% url 'video_detail_url' video.slug %}"><button type="button" class="btn btn-primary">NO</button></a>
+</ul>
+
+          </div>
+        </div>
+
+        </div>
+    </section>
 {% endblock %}

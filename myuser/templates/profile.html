@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="upcoming-meetings" id="meetings">
+    <div class="container" >
+      <div align="center" class="row">
+        <div class="col-lg-12">
+
+        </div>
+        <div class="col-lg-6">
+          <div class="categories">
+            <ul>
+            <h1>Username: {{ request.user.username }}</h1>
+<!--                      <p>A free and fully responsive site template</p>-->
+        </header>
+        <p>Name: {{ request.user }}</p>
+        <p>Date joined: {{ request.user.date_joined }}</p>
+                <p>Email: {{ request.user.email }}</p>
+                {% if request.user.image %}
+                <img src="{{ request.user.image.url }}" style="width:250px; height:300px; " alt="" />
+                {% elif not request.user.image %}
+                <img src="{% static 'images/default_user.png' %}">
+                {% endif %}
+
+ </ul>
+          </div>
+            </div>
+         <div class="col-lg-6">
+          <div class="categories">
+            <ul>
+    {% for f in fav %}
+        <h1>Favourite films: </h1>
+        <img src="{{ f.video.image.url }}" alt="" style="height: 450px; width:300px;">
+                <br>
+    <a href="{% url 'video_detail_url' f.video.slug %}"><p>{{f.video.title }}</p></a>
+
+    {% endfor %}
+      </ul>
+
+         </div>
+            </div>
+
+</section>
+
+
+{% endblock %}
