@@ -134,9 +134,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
 )
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 AUTH_USER_MODEL = 'myuser.User'
@@ -152,7 +154,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # custom settings
-PAGINATOR_NUM = 2
+PAGINATOR_NUM = 6
 
 
 # send email
@@ -161,7 +163,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = 'vdvuqucmdmyikffz'
 
 
 

@@ -38,9 +38,9 @@ def profile(request, id):
 
 
 def activate(request, activation_code):
-    print('asdasdasdasd')
+    # print('asdasdasdasd')
     user = get_object_or_404(User, activation_code=activation_code)
-    print(user, 'asdasdasdasdasd')
+    # print(user, 'asdasdasdasdasd')
     user.is_active = True
     user.activation_code = ''
     user.save()

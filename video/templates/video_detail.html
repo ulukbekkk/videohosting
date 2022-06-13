@@ -97,12 +97,13 @@
                   {% csrf_token %}
                   {{form}}
                   <input type="submit" value="Send">
+                        </form>
               {% else %}
               <a>You Must Be Logged In To Comment </a>
               <li><a href="{% url 'register' %}">Sign up</a></li>
               <li><a href="{% url 'login' %}">Log in</a></li>
               {% endif %}
-              </form>
+
                 </p>
                         </div>
 

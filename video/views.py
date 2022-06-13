@@ -70,7 +70,6 @@ def create_video(request):
             return redirect(video.get_absolute_url())
     else:
         form = CreateVideoForm()
-
     return render(request, 'create_video.html', {'create_form': form})
 
 
@@ -126,6 +125,7 @@ def delete_comment(request, id):
     video = Video.objects.get(comment=comment)
     Comment.objects.get(id=id).delete()
     return redirect(f'/video/video/{video.slug}/')
+
 
 @login_required()
 def fav(request, slug):

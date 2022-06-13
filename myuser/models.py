@@ -38,7 +38,7 @@ class User(AbstractUser):
     activation_code = models.CharField(max_length=20, blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = tuple()
+    REQUIRED_FIELDS = ()
 
     def __str__(self):
         return self.first_name
